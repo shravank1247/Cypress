@@ -1,0 +1,102 @@
+1. Create a new folder and navigate to it
+2. Create package.json file using 
+    a. npm -i init
+3. Install cypress and save it to package.json
+    a. npm install cypress --save-dev
+4. Cypress & Node_Modules will be installed 
+5. Open Test runner located at below path
+    a. .\node_modules\.bin\cypress open
+6. cypress.config and more files will be created after test runner is launched
+7. Create folder integration/examples and then create file as test01.js 
+9. Open cypress.config.js and add below line to notify which specs to run
+    a.  specPattern: 'cypress/integration/examples/*.js'
+    b. cypress.config - its a configuration file for entire cypress
+    c. Opne test runner > Settings >> Project settings >> You will file supported properties by default
+    d. if any changes in default properties, update that in cypress.config.js which overrides default settings
+10. Run test runner without opening
+    a. .\node_modules\.bin\cypress run 
+11. Run in headless mode - from cammand line 
+    a. .\node_modules\.bin\cypress run --headless
+12. Run by changing the browser
+    a.  .\node_modules\.bin\cypress run --browser Chrome
+13. Default MOCHA framework is available in cypress
+14. Cypess > fixture - is used to keep all test data files
+15. Cypess > integration - is used to keep test script files
+16. Cypess > support - is used to keep all resuable methods
+17. cypress support only CSS selectors only
+18. Difference is 
+    a. Asynchronus calls - Entire code is executed at a time without waiting for previous step status
+    b. Synchronous calls - Code executed one after other 
+19. Cypres is asynchronus in nature and there is no garuntee in sequence of execution but cypress takes care of it
+20. To make cypress asynchronus, a promise(3 states - rejection, resolve, pending) must be resolved and cypress does it by adding .then method after each step internally
+21. Non cypress cammands cannot resolve promise by themselves. We need to manually resolve it by .then()
+    a. Like when using text() with cypress cammands resolve promise as below using then
+    b. cy.get('@mainLocator').eq(index).next().then(function(cost)
+            {
+                var costText=cost.text()
+                expect(costText).to.equal('25')
+            })
+22. Cypress have capability of firing browser events 
+23. Cypress do not support cross domain
+    a. Starting test in one website and then switching to other website
+    b. To work on other domain origin to be defined again as below
+    c. cy.origin("https://www/qaclickacademy.com",()=>
+        {  cy.get("#navbarSupportedContent a[herf*='about']").click();   })
+24. Invoke() method is used to trigger JQuery methods in cypress
+25. To work on IFRAMEs, plugin must be loaded
+    a. npm install -D cypress-iframe
+    b. cy.frameLoaded('#courses-iframe') -- > To load iframe 
+    c. cy.iframe().find -- > iframe should be added for each step to make sure cypress searches on iframe 
+26. Hooks in cypress is like annotations which can run before/after tests
+27. Assertion - for behaviour use BE || for property check use HAVE.value etc
+28. Fixtures - (example.json file) fixtures are used to place key value pair in json to be used in testcase
+29. Support - (cammands.js file) Support is used to create custom fucntions in cypress
+
+
+
+1. CSS Locators (tagname is optional prefix)
+    a. ID = #idname
+    b. class = .classname
+    c. multiple classes with spaces= .classname1.classname2.etc
+    d. tagname[attr='value']
+    e. parent to child travel = parenttag childtag[attr='value']
+
+
+
+1. cy is like driver and cy object is auto initilized 
+2. To navigate a URL 
+    cy.visit("")
+3. cy.get acts like findelement
+4. Alising --> in cypress object cannot be assigned to a variable and if needed then promising should be resolve to make it work. instead alising can be used as below
+    a. cy.get('product').as('prodlocator');
+    b. calling alising as --> cy.get('@prodlocator')
+5. Loggining in cypress is different
+    a. console.log --> Its javascript function and this log will be displayed in devtools console
+    b. cy.log --> cypress log and it will be printed in testrunning execution steps
+6. Concatination of assertions can be one using AND as below
+    a. cy.get('#checkBoxOption1').check().should('be.checked').and('have.value','option1')
+7. CHECK() method should be used for checkboxes tick as being more reliable than click()
+8. Cypress auto accepts alerts and popups
+    a. Windows event will be triggered upon popup  --> windows:alert
+    b. cy.on('window:alert')
+9. In mocha strings are comparted as below
+    a. expect(str).to.equal('Expected str')
+10. To handle Newtab links to open in same tab, remove target='Blank' attribute using jquery method INVOKE
+    a. cy.get('#opentab').invoke('removeAttr','target').click();
+11. next() method is used to move to sibling locator
+    a. next() method only works on GET() method
+12. show() method is used to work on mouse hover dropdowns (hidden elements)
+    a. show() is a jquery method 
+    b. cypress do not support OOB
+    c. show method should be applied on immediate parent of hidden elements
+13. prop() method is used to get href 
+14. cy.pause() or .debug is used to pause and debugging of steps
+15. from terminal to run cypress use 
+    a. cypress run --spec 
+    b. If cypress if installed globally i.e. using npm install -g no need to specify where cypress resides
+    c. If cypress is not installed globally, the use below cmd to find 
+        i.  npx cypress run --spec cypress\integration\examples\TestingFramework.js
+16. To run cypress and pass environment variables in run time 
+    url : "https://rahulshettyacademy.com"
+    a. npx cypress run --spec cypress\integration\examples\TestingFramework.js --headed --browser chrome --env url="https://rahulshettyacademy.com"
+

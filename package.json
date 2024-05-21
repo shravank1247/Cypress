@@ -1,0 +1,39 @@
+{
+  "name": "cypress-new",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules\\.bin\\cypress run",
+    "testchrome": "npm run test --browser chrome",
+    "testheaded": "npm run testchrome --headed ",
+    "runrecordtest": "node_modules\\.bin\\cypress run --spec cypress\\integration\\examples\\Avocet.js --record --key 810cfbb2-8b96-4471-a0a8-cddbd6109a50",
+    "actualrecordTest": "node_modules\\.bin\\cypress run --spec cypress\\integration\\examples\\AvocetTest_Link*.js --record --key 0010449c-99c0-4d27-87bf-9031e17e39d9 --config-file cypress.config2.js",
+    "avocet": "node_modules\\.bin\\cypress run --spec cypress\\integration\\examples\\Avocet.js ",
+    "start": "npx cypress run -r @cypress/instrument-cra --spec cypress\\integration\\examples\\AvocetTest_Login.js",
+    "startr": " node_modules\\.bin\\cypress run --spec cypress\\integration\\examples\\AvocetTest_Login.js" ,
+    "__comment": "npm run startr"
+  },
+  "author": "Shravan",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.24.5",
+    "@cypress/code-coverage": "^3.12.39",
+    "cypress": "^13.6.4",
+    "cypress-delete-downloads-folder": "^0.0.4",
+    "cypress-iframe": "^1.0.1",
+    "cypress-plugin-tab": "^1.0.5",
+    "cypress-sql-server": "^1.0.0",
+    "istanbul-lib-coverage": "^3.2.2",
+    "lodash": "^4.17.21",
+    "mysql": "^2.18.1",
+    "neat-csv": "^7.0.0",
+    "nyc": "^15.1.0"
+  },
+  "dependencies": {
+    "@cypress/instrument-cra": "^1.4.0",
+    "cypress-downloadfile": "^1.2.3",
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "react-scripts": "^5.0.1"
+  }
+}
